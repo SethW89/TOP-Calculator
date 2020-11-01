@@ -1,0 +1,92 @@
+#calculator {
+    background-color: crimson;
+    display: grid;
+    width: 500px;
+    height: 600px;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 20% auto;
+    grid-template-areas:
+    ". display ."
+    ". buttonContainer .";
+}   
+#buttonContainer {
+    grid-area: buttonContainer;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 15% 15% 15% 15% 15% 15%;
+    grid-template-areas:
+    "clear plusMinus percent division"
+    "seven eight nine multiply"
+    "four five six subtract"
+    "one two three add"
+    "zero decimal equal add";
+}
+#display {
+    grid-area: display;
+}
+#btn0 {
+    grid-area: zero;
+}
+#btn1 {
+    grid-area: one;
+}
+#btn2 {
+    grid-area: two;
+}
+#btn3 {
+    grid-area: three;
+}
+#btn4 {
+    grid-area: four;
+}
+#btn5 {
+    grid-area: five;
+}
+#btn6 {
+    grid-area: six;
+}
+#btn7 {
+    grid-area: seven;
+}
+#btn8 {
+    grid-area: eight;
+}
+#btn9 {
+    grid-area: nine;
+}
+#clearBtn {
+    grid-area:clear;
+    
+}
+#plusMinusBtn {
+    grid-area:plusMinus;
+}
+#percentBtn {
+    grid-area:percent;
+}
+#divideBtn {
+    grid-area:division;
+}
+#multiplyBtn {
+    grid-area: multiply;
+}
+#subtractBtn {
+    grid-area: subtract;
+}
+#decimalBtn {
+    grid-area: decimal;
+}
+#equalBtn {
+    grid-area: equal;
+}
+
+#addBtn {
+    background-color: darkgoldenrod;
+    color: darkseagreen;
+    /*grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+*/
+    grid-area: add;
+}
