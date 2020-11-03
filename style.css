@@ -15,7 +15,7 @@
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 15% 15% 15% 15% 15% 15%;
     grid-template-areas:
-    "clear plusMinus percent division"
+    "clear clear plusMinus division"
     "seven eight nine multiply"
     "four five six subtract"
     "one two three add"

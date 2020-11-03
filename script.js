@@ -43,6 +43,7 @@ function divide(a, b) {
     return a / b;
 }
 
+
 function operate(a, b, operator) {
     if (operator === '+') {
         return add(a, b);
@@ -88,9 +89,14 @@ for (let i = 0; i < functionBtn.length; i++) {
             case '-':
             case 'X':
             case '/':
+            case '%':
                 // We do the previous operation, and reassign
                 // the current and past operands and queue the
                 // next operator
+                if (prevOperator === '') {
+                    prevOperator = functionBtn[i].textContent;
+                }
+
                 console.log(prevOperand, currOperand, prevOperator);
                 prevOperand = operate(prevOperand, currOperand, prevOperator);
                 prevOperator = functionBtn[i].textContent;
@@ -103,12 +109,17 @@ for (let i = 0; i < functionBtn.length; i++) {
             case '.':
                 break;
             case '=':
-                break;
-            case '%':
+                console.log(prevOperand, currOperand, prevOperator);
+                prevOperand = operate(prevOperand, currOperand, prevOperator);
+                prevOperator = ''
+                newOperand = true;
+                displayUpdate(prevOperand);
                 break;
             case 'CLEAR':
                 display.textContent = '0';
                 prevOperand = '0';
+                prevOperator = '+';
+                currOperand = '0';
                 break;
         }
     })
@@ -122,14 +133,5 @@ function displayUpdate(value) {
     //console.log('ascii:', value.charCodeAt());
     display.textContent = value;
     currOperand = display.textContent;
-
-    /*
-        +      - 43
-        =      - 61
-        -      - 45
-        /      - 47
-        %      - 37
-        +/-(!) - 33?
-        clear  - 127?
-    */
+    console.log(currOperand);
 }
