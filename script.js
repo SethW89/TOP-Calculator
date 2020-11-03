@@ -22,7 +22,6 @@ let newOperand = true; // Flag for overwriting screen with new number
 
 // Addition function
 function add(a, b) {
-    //console.log('Adding', Number(a) + Number(b));
     return Number(a) + Number(b);
 }
 // Subtraction function
@@ -60,14 +59,9 @@ function operate(a, b, operator) {
 }
 
 // get numbers to show on display when button pressed
-//console.log(numberBtn);
 //Add event for each number button
-//console.log(numberBtn.length);
-//console.log(numberBtn[0]);
 for (let i = 0; i < numberBtn.length; i++) {
     numberBtn[i].addEventListener('click', () => {
-        //console.log(numberBtn[i]);
-        //console.log(numberBtn[i].textContent);
         // Send said text content to display
         if (newOperand) {
             displayUpdate(numberBtn[i].textContent);
@@ -80,23 +74,19 @@ for (let i = 0; i < numberBtn.length; i++) {
 // Assign other buttons
 const functionBtn = document.getElementsByClassName('functionBtn');
 for (let i = 0; i < functionBtn.length; i++) {
-    //console.log(functionBtn);
     // if add is selected
-    //console.log(functionBtn[i].textContent);
     functionBtn[i].addEventListener('click', () => {
         switch (functionBtn[i].textContent) {
             case '+':
             case '-':
             case 'X':
             case '/':
-            case '%':
                 // We do the previous operation, and reassign
                 // the current and past operands and queue the
                 // next operator
                 if (prevOperator === '') {
                     prevOperator = functionBtn[i].textContent;
                 }
-
                 console.log(prevOperand, currOperand, prevOperator);
                 prevOperand = operate(prevOperand, currOperand, prevOperator);
                 prevOperator = functionBtn[i].textContent;
@@ -114,12 +104,11 @@ for (let i = 0; i < functionBtn.length; i++) {
                 prevOperator = ''
                 newOperand = true;
                 displayUpdate(prevOperand);
+                currOperand = 0;
+                prevOperand = display.textContent;
                 break;
             case 'CLEAR':
-                display.textContent = '0';
-                prevOperand = '0';
-                prevOperator = '+';
-                currOperand = '0';
+                stateCleared()
                 break;
         }
     })
@@ -130,8 +119,14 @@ function clearDisplay() {
 }
 function displayUpdate(value) {
     // If value is not a number...
-    //console.log('ascii:', value.charCodeAt());
     display.textContent = value;
     currOperand = display.textContent;
     console.log(currOperand);
+}
+
+function stateCleared() {
+    display.textContent = '0';
+    prevOperand = '0';
+    prevOperator = '+';
+    currOperand = '0';
 }
