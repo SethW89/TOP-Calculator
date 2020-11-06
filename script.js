@@ -105,8 +105,9 @@ function clearDisplay() {
 function displayUpdate(value) {
     // If value is not a number...
     console.log(String(value).length);
+    console.log(parseFloat(value).toExponential(3))
     if (String(value).length > 12) {
-        display.textContent = value.toPrecision(11);
+        display.textContent = parseFloat(value.toPrecision(10)).toExponential(3);
     } else {
         display.textContent = value;
     }

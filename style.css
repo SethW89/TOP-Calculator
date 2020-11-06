@@ -34,6 +34,7 @@
     font-family: 'Share Tech Mono', monospace;
     text-align: right;
 }
+
 .button {
     margin: 8px;
     box-shadow: 5px 5px 10px #ac001c,
@@ -105,4 +106,7 @@
     color: lightgray;
     font-size: 50px;
     grid-area: add;
+}
+.functionBtn {
+    color: lightgray;
 }
