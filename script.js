@@ -104,8 +104,13 @@ function clearDisplay() {
 }
 function displayUpdate(value) {
     // If value is not a number...
-    //prevOperand = display.textContent;
-    display.textContent = value;
+    console.log(String(value).length);
+    if (String(value).length > 12) {
+        display.textContent = value.toPrecision(11);
+    } else {
+        display.textContent = value;
+    }
+
     currOperand = display.textContent;
     console.log(currOperand);
 }
