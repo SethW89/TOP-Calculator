@@ -103,10 +103,9 @@
 }
 
 #addBtn {
-    color: lightgray;
     font-size: 50px;
     grid-area: add;
 }
 .functionBtn {
-    color: lightgray;
+    color: #fff;
 }
