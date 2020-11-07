@@ -31,11 +31,16 @@ for (let i = 0; i < numberBtn.length; i++) {
     numberBtn[i].addEventListener('click', () => {
         // Send said text content to display
         if (operandFlag) {
-            displayUpdate(numberBtn[i].textContent);
+            if (decimalFlag) {
+                console.log('did the decimal stuff.');
+                displayUpdate('0.' + numberBtn[i].textContent);
+                decimalFlag = false;
+            } else {
+                displayUpdate(numberBtn[i].textContent);
+            }
             operandFlag = false;
         } else {
             displayUpdate(currOperand + numberBtn[i].textContent);
-
         }
     });
 }
@@ -68,7 +73,11 @@ for (let i = 0; i < functionBtn.length; i++) {
 
                 break;
             case '.':
-                if (display.textContent.includes('.')) {
+                if (operandFlag == true) {
+                    display.textContent = '0.';
+                    decimalFlag = true;
+                    break;
+                } else if (display.textContent.includes('.')) {
                     break;
                 } else {
                     displayUpdate(display.textContent + '.');
@@ -95,7 +104,6 @@ function clearDisplay() {
     display.textContent = '';
 }
 function displayUpdate(value) {
-    console.log(String(value).length);
     if (display.textContent == '0' && value == '0') {
         return;
     }
@@ -116,6 +124,7 @@ function stateCleared() {
     prevOperator = '';
     currOperand = '';
     operandFlag = true;
+    decimalFlag = false;
 }
 
 // Addition function
