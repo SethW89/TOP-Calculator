@@ -1,20 +1,49 @@
-#calculator {
-    background-color: crimson;
-    display: grid;
-    width: 500px;
-    height: 600px;
-    grid-template-columns: 10% 80% 10%;
-    border-radius: 3%;
+body {
+    /*background-color: #D2D1CD;*/
+    background-image: url("images/yaopey-yong-cUHrBVJRoK8-unsplash.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#container {    
+    margin: 0 auto;
+
     grid-template-rows: 20% auto;
     grid-template-areas:
     ". display ."
     ". buttonContainer .";
+    display: grid;
+    width: 26rem;
+    height: 28rem;
+    grid-template-columns: 10% 80% 10%;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .4);
+    border-radius: 15px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
 }   
+#container::before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    filter: blur(4px);
+    margin: -20px;
+}
 #buttonContainer {
     grid-area: buttonContainer;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 18% 18% 18% 18% 18% auto;
+    grid-template-rows: 18% 18% 18% 18% 18% 10%;
     grid-template-areas:
     "clear clear plusMinus division"
     "seven eight nine multiply"
@@ -28,8 +57,8 @@
 }
 #display {
     /*grid-area: display;*/
-    border: 3px solid black;
-    background-color: lightgreen;
+    border: 3px solid rgba(0, 0, 0, 0.6);
+    background-color: rgba(144, 238, 144, 0.5);
     font-size: 50px;
     font-family: 'Share Tech Mono', monospace;
     text-align: right;
@@ -37,13 +66,16 @@
 
 .button {
     margin: 8px;
-    box-shadow: 5px 5px 10px #ac001c,
+    padding-top: 10px;
+    padding-bottom: 10px;
+   /* box-shadow: 5px 5px 10px #ac001c,
                 -5px -5px 10px #ec243c;
-    background-color: crimson;
-    border-radius: 40%;
+    /*background-color: ;*/
+    border-radius: 20%;
     border: none;
     font-size: 30px;
     font-family: 'Share Tech Mono', monospace;
+    background-color: inherit;
 }
 #btn0 {
     grid-area: zero;
@@ -101,11 +133,10 @@
 #equalBtn {
     grid-area: equal;
 }
-
 #addBtn {
     font-size: 50px;
     grid-area: add;
 }
 .functionBtn {
-    color: #fff;
+    color: #666;
 }
