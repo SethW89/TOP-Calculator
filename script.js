@@ -1,5 +1,6 @@
 
 const numberBtn = document.getElementsByClassName('number');
+const functionBtn = document.getElementsByClassName('functionBtn');
 const display = document.getElementById('display');
 display.textContent = '0';
 let prevOperand = '';
@@ -7,8 +8,6 @@ let currOperand = '';
 let prevOperator = '';
 let operandFlag = true; // Flag for overwriting screen with new number
 let decimalFlag = false; // determins if we currently have a decimal number
-
-
 
 function operate(a, b, operator) {
     console.log(a, operator, b);
@@ -23,7 +22,6 @@ function operate(a, b, operator) {
     } else {
         return 'OP ERROR';
     }
-
 }
 
 // Add event for each number button
@@ -32,7 +30,6 @@ for (let i = 0; i < numberBtn.length; i++) {
         // Send said text content to display
         if (operandFlag) {
             if (decimalFlag) {
-                console.log('did the decimal stuff.');
                 displayUpdate('0.' + numberBtn[i].textContent);
                 decimalFlag = false;
             } else {
@@ -44,70 +41,114 @@ for (let i = 0; i < numberBtn.length; i++) {
         }
     });
 }
-// Assign other buttons
-const functionBtn = document.getElementsByClassName('functionBtn');
-for (let i = 0; i < functionBtn.length; i++) {
-    functionBtn[i].addEventListener('click', () => {
-        switch (functionBtn[i].textContent) {
-            case '+':
-            case '-':
-            case 'X':
-            case '/':
-                // We do the previous operation, and reassign
-                // the current and past operands and queue the
-                // next operator
-                if (prevOperator === '') {
-                    console.log('Hello there.', functionBtn[i].textContent);
-                    prevOperator = functionBtn[i].textContent;
-                    prevOperand = currOperand;
-                    operandFlag = true;
+
+// Support for keyboard
+document.addEventListener('keydown', e => {
+    console.log(e.key);
+    for (let i = 0; i < numberBtn.length; i++) {
+        if (numberBtn[i].textContent == e.key) {
+            //console.log(numberBtn[i].textContent);
+            if (operandFlag) {
+                if (decimalFlag) {
+                    displayUpdate('0.' + numberBtn[i].textContent);
+                    decimalFlag = false;
                 } else {
-                    console.log(prevOperand, prevOperator, currOperand);
-                    prevOperand = operate(prevOperand, currOperand, prevOperator);
-                    prevOperator = functionBtn[i].textContent;
-                    operandFlag = true;
-                    displayUpdate(prevOperand);
+                    displayUpdate(numberBtn[i].textContent);
                 }
-
-                // Update Display with result of previous operation
-
-                break;
-            case '.':
-                if (operandFlag == true) {
-                    display.textContent = '0.';
-                    decimalFlag = true;
-                    break;
-                } else if (display.textContent.includes('.')) {
-                    break;
-                } else {
-                    displayUpdate(display.textContent + '.');
-                }
-                break;
-            case '=':
-                console.log(prevOperand, prevOperator, currOperand);
-                if (prevOperator != '') {
-                    prevOperand = operate(prevOperand, currOperand, prevOperator);
-                    prevOperator = '';
-                    currOperand = ''
-                    operandFlag = true;
-                    displayUpdate(prevOperand);
-                }
-                break;
-            case '+/-':
-                currOperand = display.textContent * -1;
-                displayUpdate(currOperand);
-
-                break;
-            case 'CLEAR':
-                stateCleared()
-                break;
+                operandFlag = false;
+            } else {
+                displayUpdate(currOperand + numberBtn[i].textContent);
+            }
         }
-    })
+    }
+    switch (e.key) {
+        case 'Enter':
+        case '=':
+            btnEvent('=');
+            break;
+        case '-':
+            btnEvent('-');
+            break;
+        case '/':
+            btnEvent('/');
+            break;
+        case 'Backspace':
+            btnEvent('CLEAR');
+            break;
+        case '*':
+            btnEvent('X');
+            break;
+    }
+});
 
+// Assign function buttons
+for (let i = 0; i < functionBtn.length; i++) {
+    functionBtn[i].addEventListener('click', (e) => {
+        btnEvent(e.target.textContent);
+    })
 }
+
+function btnEvent(functionDesignator) {
+    console.log('HELLO', functionDesignator);
+    switch (functionDesignator) {
+        case '+':
+        case '-':
+        case 'X':
+        case '/':
+            // We do the previous operation, and reassign
+            // the current and past operands and queue the
+            // next operator
+            if (prevOperator === '') {
+                console.log('Hello there.', functionDesignator);
+                prevOperator = functionDesignator;
+                prevOperand = currOperand;
+                operandFlag = true;
+            } else {
+                console.log(prevOperand, prevOperator, currOperand);
+                prevOperand = operate(prevOperand, currOperand, prevOperator);
+                prevOperator = functionDesignator;
+                operandFlag = true;
+                displayUpdate(prevOperand);
+            }
+            break;
+        case '.':
+            if (operandFlag == true) {
+                display.textContent = '0.';
+                decimalFlag = true;
+                break;
+            } else if (display.textContent.includes('.')) {
+                break;
+            } else {
+                displayUpdate(display.textContent + '.');
+            }
+            break;
+        case '=':
+            console.log(prevOperand, prevOperator, currOperand);
+            if (prevOperator != '') {
+                prevOperand = operate(prevOperand, currOperand, prevOperator);
+                prevOperator = '';
+                currOperand = ''
+                operandFlag = true;
+                displayUpdate(prevOperand);
+            }
+            break;
+        case '+/-':
+            currOperand = display.textContent * -1;
+            displayUpdate(currOperand);
+            break;
+        case 'CLEAR':
+            stateCleared()
+            break;
+    }
+}
+
+
+
+
 function clearDisplay() {
     display.textContent = '';
 }
+
 function displayUpdate(value) {
     if (display.textContent == '0' && value == '0') {
         return;
