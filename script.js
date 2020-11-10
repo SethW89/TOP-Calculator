@@ -93,6 +93,11 @@ for (let i = 0; i < functionBtn.length; i++) {
                     displayUpdate(prevOperand);
                 }
                 break;
+            case '+/-':
+                currOperand = display.textContent * -1;
+                displayUpdate(currOperand);
+
+                break;
             case 'CLEAR':
                 stateCleared()
                 break;
