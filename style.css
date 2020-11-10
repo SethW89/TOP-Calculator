@@ -9,7 +9,11 @@ body {
 
 
 #container {    
-    margin: 0 auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     vertical-align: middle;
     grid-template-rows: 20% auto;
     grid-template-areas:
@@ -21,7 +25,7 @@ body {
     grid-template-columns: 10% 80% 10%;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .4);
     border-radius: 15px;
-    position: relative;
+    position: absolute;
     z-index: 1;
     background: inherit;
     overflow: hidden;
@@ -35,9 +39,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: inset 0 0 2000px rgba(255, 86, 86, 0.5);
+    box-shadow: inset 0 0 2000px rgba(255, 176, 176, .3);
     filter: blur(10px);
-    margin: -20px;
 }
 #buttonContainer {
     grid-area: buttonContainer;
@@ -45,11 +48,11 @@ body {
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 18% 18% 18% 18% 18% 10%;
     grid-template-areas:
-    "clear clear plusMinus division"
-    "seven eight nine multiply"
-    "four five six subtract"
-    "one two three add"
-    "zero decimal equal add";
+    "clear clear   plusMinus division"
+    "seven eight   nine      multiply"
+    "four  five    six       subtract"
+    "one   two     three     add"
+    "zero  decimal equal     add";
 }
 #displayWrapper {
     grid-area: display;
@@ -142,7 +145,8 @@ body {
     grid-area: add;
 }
 .functionBtn {
-    color: brown;
+    background-color: rgba(255,255, 255, .1);
+    color: rgb(155, 0, 0);
 }
 
 *:focus {
