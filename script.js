@@ -1,4 +1,3 @@
-
 const numberBtn = document.getElementsByClassName('number');
 const functionBtn = document.getElementsByClassName('functionBtn');
 const display = document.getElementById('display');
@@ -44,10 +43,8 @@ for (let i = 0; i < numberBtn.length; i++) {
 
 // Support for keyboard
 document.addEventListener('keydown', e => {
-    console.log(e.key);
     for (let i = 0; i < numberBtn.length; i++) {
         if (numberBtn[i].textContent == e.key) {
-            //console.log(numberBtn[i].textContent);
             if (operandFlag) {
                 if (decimalFlag) {
                     displayUpdate('0.' + numberBtn[i].textContent);
@@ -89,7 +86,6 @@ for (let i = 0; i < functionBtn.length; i++) {
 }
 
 function btnEvent(functionDesignator) {
-    console.log('HELLO', functionDesignator);
     switch (functionDesignator) {
         case '+':
         case '-':
@@ -99,12 +95,10 @@ function btnEvent(functionDesignator) {
             // the current and past operands and queue the
             // next operator
             if (prevOperator === '') {
-                console.log('Hello there.', functionDesignator);
                 prevOperator = functionDesignator;
                 prevOperand = currOperand;
                 operandFlag = true;
             } else {
-                console.log(prevOperand, prevOperator, currOperand);
                 prevOperand = operate(prevOperand, currOperand, prevOperator);
                 prevOperator = functionDesignator;
                 operandFlag = true;
@@ -123,7 +117,6 @@ function btnEvent(functionDesignator) {
             }
             break;
         case '=':
-            console.log(prevOperand, prevOperator, currOperand);
             if (prevOperator != '') {
                 prevOperand = operate(prevOperand, currOperand, prevOperator);
                 prevOperator = '';
@@ -160,7 +153,6 @@ function displayUpdate(value) {
     }
 
     currOperand = display.textContent;
-    console.log(currOperand);
 }
 
 // Reset to initial conditions
